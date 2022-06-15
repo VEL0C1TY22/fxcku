@@ -187,4 +187,17 @@ async def channelclean(ctx, channeltodelete):
                 except:
                   pass
 
+@commands.check(is_allowed)
+@client.command(aliases=["P4p"])
+async def p4p(ctx, bool):
+    global p4pp
+    if bool == "true":
+        p4pp = True
+        await ctx.reply("P4p mode Enabled | Now anyone messaging will be banned !!")
+    elif bool == "false":
+        p4pp = False
+        await ctx.reply("P4p mode Disabled | Now everyone can message")
+    else:
+        await ctx.reply("Please justify `true` or `false`")
+
 client.run(os.environ["token"])
