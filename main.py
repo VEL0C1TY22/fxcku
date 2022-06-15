@@ -157,7 +157,7 @@ async def mute(ctx, user: discord.Member, time=None, *, reason=None):
   time = humanfriendly.parse_timespan(time)
   if user == ctx.author:
     await ctx.reply(f"<a:Srw_cross:950400419996237894> | You Can't Timeout yourself !!")
-  elif ctx.author.top_role > user.top_role or ctx.author == ctx.guild.owner:
+  elif ctx.author.top_role >= user.top_role or ctx.author == ctx.guild.owner:
     await user.timeout_for(duration=datetime.timedelta(seconds=time), reason=reason)
     await ctx.reply(f"<a:chr_Black_Tick:950400456998408242> | <@!{user.id}> has been timed out for {time} seconds by {ctx.author}")
   else:
@@ -169,7 +169,7 @@ async def mute(ctx, user: discord.Member, time=None, *, reason=None):
 async def unmute(ctx, user: discord.Member=None, *, reason=None):
   if user == ctx.author:
     await ctx.reply(f"<a:Srw_cross:950400419996237894> | You Can't Timeout yourself !!")
-  elif ctx.author.top_role > user.top_role or ctx.author == ctx.guild.owner:
+  elif ctx.author.top_role >= user.top_role or ctx.author == ctx.guild.owner:
     await user.timeout(until=None, reason=reason)
     await ctx.reply(f"<a:chr_Black_Tick:950400456998408242> | Removed timeout from <@!{user.id}> by {ctx.author}")
   else:
