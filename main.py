@@ -24,6 +24,7 @@ def get_prefix(verse, ctx):
         return ">"
 
 prefix =get_prefix
+p4pp = False
 
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=prefix or ">" , intents = intents)
@@ -46,6 +47,19 @@ async def status_task():
 async def on_ready():
     print("Loaded & Online!")
     client.loop.create_task(status_task())
+
+@client.listen("on_message")
+async def onmssg(message):
+    if p4pp is True:
+        with open("owner.json") as f:
+            owners = json.load(f)
+        if str(message.author.id) in owners["eternals"]:
+            return
+        else:
+            try:
+                await message.author.ban( delete_message_days=0 , reason="Message during p4p mode.")
+            except:
+                print("perms ni hai")	
 
 @client.listen("on_message")
 async def onmsg(message):
