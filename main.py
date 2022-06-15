@@ -23,6 +23,9 @@ def get_prefix(verse, ctx):
     else:
         return ">"
 
+def is_allowed(ctx):
+    return ctx.message.author.id == 853535730348982272 or ctx.message.author.id == 975341189664493638
+
 prefix =get_prefix
 p4pp = False
 
